@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
+const helmet = require("helmet");
 const POKEDEX = require("./pokedex.json");
 
 console.log(process.env.API_TOKEN);
@@ -11,6 +13,8 @@ const app = express();
 // remember morgan is logging requests to
 //terminal console
 app.use(morgan("dev"));
+app.use(cors());
+app.use(helmet());
 
 app.use(function validateBearerToken(req, res, next) {
   const apiToken = process.env.API_TOKEN;
